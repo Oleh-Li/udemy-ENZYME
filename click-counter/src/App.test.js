@@ -5,14 +5,14 @@ import App from './App';
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
- /**
-  * Factory function to create a ShallowWrapper for the App component.
-  * @function setup
-  * @param {object} props - Component props specific to this setup.
-  * @returns {ShallowWrapper}
-  */
- const setup = (props={}) => {
-  return shallow(<App { ...props }/>)
+/**
+ * Factory function to create a ShallowWrapper for the App component.
+ * @function setup
+ * @param {object} props - Component props specific to this setup.
+ * @returns {ShallowWrapper}
+ */
+const setup = (props = {}) => {
+  return shallow(<App {...props} />) //shallow() function to render component
 }
 
 /**
@@ -28,7 +28,7 @@ const findByTestAttr = (wrapper, val) => {
 test('renders without error', () => {
   const wrapper = setup();
   const appComponent = findByTestAttr(wrapper, 'component-app');
-  expect(appComponent.length).toBe(1);
+  expect(appComponent.length).toBe(1); //ми перевіряємо, що є рівно один елемент, який має атрибут data-test="component-app"
 });
 
 test('renders increment button', () => {
@@ -51,7 +51,7 @@ test('counter starts at 0', () => {
 
 test('counter increments when button is clicked', () => {
   const wrapper = setup();
-  
+
   // find button and click
   const button = findByTestAttr(wrapper, 'increment-button');
   button.simulate('click');
